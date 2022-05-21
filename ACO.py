@@ -6,15 +6,15 @@ from numpy import inf
 warnings.simplefilter("ignore")
 
 #Adjacency list of graph
-d = np.array([[0, 10, 12, 11, 14]
-             ,[10, 0, 13, 15, 8]
-             ,[12, 13, 0, 9, 14]
-             ,[11, 15, 9, 0, 16]
-             ,[14, 8, 14, 16, 0]])
+d = np.array([[0, 15, 14, 13, 10]
+             ,[10, 0, 11, 10, 7]
+             ,[12, 12, 0, 9, 14]
+             ,[15, 16, 11, 0, 9]
+             ,[10, 5, 14, 16, 0]])
 
 iteration = 100
 #Number of ants
-m = 5
+m = 10
 #Number of vertices
 n = 5
 
@@ -47,7 +47,8 @@ for _ in range(iteration):
             cum_prob = np.cumsum(probs)
             r = np.random.random_sample()
             #Roulette Selection of next vertex 
-            next_vertex = np.nonzero(cum_prob > r)[0][0] + 1
+            next_vertex = np.nonzero(cum_prob > r)[0][0]
+            next_vertex += 1
             route[ant, vertex + 1] = next_vertex
         #Last Vertex left to traverse
         next_vertex = list(set([i for i in range(1, n + 1)]) - set(route[ant, :-2]))[0]
